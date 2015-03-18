@@ -1,5 +1,7 @@
 package com.zxmonk.helloworld;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +27,28 @@ public class HelloWorldActivity extends ActionBarActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HelloWorldActivity.this,"You clicked Button 1",
-                        Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HelloWorldActivity.this,"You clicked Button 1",
+                //        Toast.LENGTH_SHORT).show();
+                //finish();
+                //Intent intent = new Intent(HelloWorldActivity.this,SecondActivity.class);
+                //Intent intent = new Intent("com.zxmonk.HelloWorld.ACTION_START");
+                //intent.addCategory("com.zxmonk.HelloWorld.MY_CATEGORY");
+
+                //Intent intent = new Intent(Intent.ACTION_VIEW);
+                //intent.setData(Uri.parse("http://www.baidu.com"));
+
+                //Intent intent = new Intent(Intent.ACTION_DIAL);
+                //intent.setData(Uri.parse("tel:10086"));
+
+                /*String data = "Hello SecondActivity";
+                Intent intent = new Intent(HelloWorldActivity.this, SecondActivity.class);
+                intent.putExtra("extra_data", data);
+                startActivity(intent);*/
+
+                Intent intent = new Intent(HelloWorldActivity.this, SecondActivity.class);
+                startActivityForResult(intent, 1);
+
+
             }
         });
 
@@ -56,10 +78,11 @@ public class HelloWorldActivity extends ActionBarActivity {
 
         switch (item.getItemId()) {
             case R.id.add_item:
-                Toast.makeText(this, "You clicked Add", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You clicked "+getString(R.string.menu_1), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.remove_item:
-                Toast.makeText(this, "You clicked Remove", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You clicked "+getString(R.string.menu_2), Toast.LENGTH_SHORT).show();
+                finish();
                 break;
             default:
 
@@ -68,4 +91,18 @@ public class HelloWorldActivity extends ActionBarActivity {
 
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    String returnedData = data.getStringExtra("data_return");
+                    Log.d("FirstActivity", returnedData);
+                }
+                break;
+            default:
+        }
+    }
+
 }
