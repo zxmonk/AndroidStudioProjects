@@ -1,7 +1,5 @@
 package com.zxmonk.activitylifecycletest;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,30 +9,18 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class NormalActivity extends BaseActivity {
-
-
-    public static void actionStart(Context context, String data1, String data2) {
-        Intent intent = new Intent(context, NormalActivity.class);
-        intent.putExtra("param1", data1);
-        intent.putExtra("param2", data2);
-        context.startActivity(intent);
-    }
-
+public class ThirdActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("SecondActivity", "Task id is "+getTaskId());
-        setContentView(R.layout.activity_normal);
-
-        Button returnMainActivity = (Button) findViewById(R.id.return_main_activity);
-
-        returnMainActivity.setOnClickListener(new View.OnClickListener() {
+        Log.d("ThirdActivity", "Task id is " + getTaskId());
+        setContentView(R.layout.activity_third);
+        Button button3 = (Button) findViewById(R.id.button_3);
+        button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NormalActivity.this,ThirdActivity.class);
-                startActivity(intent);
+                ActivityCollector.finishAll();
             }
         });
 
@@ -44,7 +30,7 @@ public class NormalActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_normal, menu);
+        getMenuInflater().inflate(R.menu.menu_third, menu);
         return true;
     }
 
