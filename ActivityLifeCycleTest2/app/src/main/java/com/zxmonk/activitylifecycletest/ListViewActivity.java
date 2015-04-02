@@ -1,38 +1,35 @@
 package com.zxmonk.activitylifecycletest;
 
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 
-public class BaseActivity extends ActionBarActivity {
+public class ListViewActivity extends BaseActivity {
+
+    private String[] data = { "Apple", "Banana", "Orange", "Watermelon",
+            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("BaseActivity", getClass().getSimpleName());
-        ActivityCollector.addActivity(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+        setContentView(R.layout.activity_list_view);
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ActivityCollector.removeActivity(this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ListViewActivity.this,android.R.layout.simple_list_item_1, data);
+        ListView listView = (ListView) findViewById(R.id.list_View);
+        listView.setAdapter(adapter);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_base, menu);
+        getMenuInflater().inflate(R.menu.menu_list_view, menu);
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -41,21 +38,9 @@ public class BaseActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
-            ActivityCollector.finishAll();
-            return true;
-
-        }
-
-        if (id == android.R.id.home){
-            finish();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-
-
+    }*/
 }

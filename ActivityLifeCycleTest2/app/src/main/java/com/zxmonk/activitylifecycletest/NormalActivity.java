@@ -28,6 +28,7 @@ public class NormalActivity extends BaseActivity {
         Log.d("SecondActivity", "Task id is "+getTaskId());
         setContentView(R.layout.activity_normal);
 
+
         Button returnMainActivity = (Button) findViewById(R.id.return_main_activity);
 
         returnMainActivity.setOnClickListener(new View.OnClickListener() {
